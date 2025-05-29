@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Payara 6.25.0" type="PayaraServerConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="Payara 6.25.0" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="11">
-    <option name="UPDATING_POLICY" value="restart-server" />
+  <configuration default="false" name="Payara 6.25.0" type="PayaraServerConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="Payara 6.25.0" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="17">
+    <option name="UPDATING_POLICY" value="redeploy-artifacts" />
     <deployment>
       <artifact name="ear:ear">
         <settings />

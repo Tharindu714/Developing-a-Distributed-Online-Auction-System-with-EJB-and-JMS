@@ -14,6 +14,7 @@
         <module>web</module>
         <module>ejb</module>
         <module>ear</module>
+        <module>ActiveMQ</module>
     </modules>
 
     <properties>

@@ -1,4 +1,4 @@
-package com.tharindu.me.auctionSystem.web.jms.message;
+package com.tharindu.me.auctionSystem.web.jms;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.ActivationConfigProperty;
@@ -9,13 +9,10 @@ import jakarta.jms.MessageListener;
 
 //Message Driven Bean
 @MessageDriven(activationConfig = {
-//        @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "jms/myQueue"), //For Queue Connections
         @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "jakarta.jms.Topic"),
         @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "activeMQTopic"),
         @ActivationConfigProperty(propertyName = "destination", propertyValue = "activeMQTopic"),
         @ActivationConfigProperty(propertyName = "resourceAdapter", propertyValue = "activemq-rar-6.1.6"),
-        //@ActivationConfigProperty(propertyName = "maxPoolSize", propertyValue = "1"), //Server-specific -->> (maxSession or maxPoolSize)
-        //@ActivationConfigProperty(propertyName = "poolResizeQuantity", propertyValue = "1"), //Server-specific
 })
 public class MessageReceiver implements MessageListener {
 

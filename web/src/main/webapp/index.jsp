@@ -82,6 +82,36 @@
             color: #7f8c8d;
             font-size: 0.9rem;
         }
+
+        .jms-btn {
+            padding: 12px 24px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+            cursor: pointer;
+            color: #fff;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .sender-btn {
+            background: #3498db;
+        }
+
+        .sender-btn:hover {
+            background: #2980b9;
+            transform: scale(1.05);
+        }
+
+        .receiver-btn {
+            background: #8e44ad;
+        }
+
+        .receiver-btn:hover {
+            background: #732d91;
+            transform: scale(1.05);
+        }
+
     </style>
 </head>
 <body>
@@ -96,7 +126,7 @@
         <header>Setup & GitHub Workflow</header>
         <div class="content">
             <p><strong>Status:</strong> In Progress</p>
-            <p><strong>Due:</strong> 2025-06-05</p>
+            <p><strong>Due:</strong> 2025-06-01</p>
             <a href="setup-guide.jsp" class="btn">View Details</a>
         </div>
     </div>
@@ -105,8 +135,8 @@
     <div class="assignment-card">
         <header>EJB & JMS Implementation</header>
         <div class="content">
-            <p><strong>Status:</strong> Not Started</p>
-            <p><strong>Due:</strong> 2025-06-12</p>
+            <p><strong>Status:</strong> Done</p>
+            <p><strong>Due:</strong> 2025-05-25</p>
             <a href="implementation.jsp" class="btn">View Details</a>
         </div>
     </div>
@@ -116,7 +146,7 @@
         <header>Testing Strategy & Report</header>
         <div class="content">
             <p><strong>Status:</strong> Pending Review</p>
-            <p><strong>Due:</strong> 2025-06-19</p>
+            <p><strong>Due:</strong> 2025-05-29</p>
             <a href="testing-report.jsp" class="btn">View Details</a>
         </div>
     </div>
@@ -126,7 +156,7 @@
         <header>Technical Report</header>
         <div class="content">
             <p><strong>Status:</strong> Completed</p>
-            <p><strong>Due:</strong> 2025-06-26</p>
+            <p><strong>Due:</strong> 2025-06-01</p>
             <a href="tech-report.jsp" class="btn">View Details</a>
         </div>
     </div>
@@ -157,5 +187,18 @@
 <footer>
     &copy; 2025 Auction System — All Rights Reserved
 </footer>
+
+<section style="margin-top: 40px; text-align: center;">
+    <h2>JMS Actions</h2>
+    <div style="margin-top: 20px;">
+        <form action="startSender" method="post" style="display:inline;">
+            <button class="jms-btn sender-btn" type="submit">🚀 Start Message Sender</button>
+        </form>
+        <form action="startReceiver" method="post" style="display:inline;">
+            <button class="jms-btn receiver-btn" type="submit">📥 Start Message Receiver</button>
+        </form>
+    </div>
+</section>
+
 </body>
 </html>
