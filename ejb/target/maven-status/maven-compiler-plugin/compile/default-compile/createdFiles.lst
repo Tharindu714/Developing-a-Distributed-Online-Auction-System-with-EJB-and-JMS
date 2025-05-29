@@ -1,0 +1,3 @@
+com\tharindu\me\auctionSystem\ejb\Remote\AuctionManager.class
+com\tharindu\me\auctionSystem\ejb\Remote\ProductService.class
+com\tharindu\me\auctionSystem\ejb\Bean\ProductServiceBean.class
