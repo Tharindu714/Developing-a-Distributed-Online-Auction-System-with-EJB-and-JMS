@@ -1,0 +1,34 @@
+Index: ejb/src/main/java/com/tharindu/me/auctionSystem/ejb/Bean/AuctionTimerBean.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ejb/src/main/java/com/tharindu/me/auctionSystem/ejb/Bean/AuctionTimerBean.java b/ejb/src/main/java/com/tharindu/me/auctionSystem/ejb/Bean/AuctionTimerBean.java
+--- a/ejb/src/main/java/com/tharindu/me/auctionSystem/ejb/Bean/AuctionTimerBean.java	
++++ b/ejb/src/main/java/com/tharindu/me/auctionSystem/ejb/Bean/AuctionTimerBean.java	(date 1748633397092)
+@@ -1,4 +1,25 @@
+ package com.tharindu.me.auctionSystem.ejb.Bean;
+ 
++
++import jakarta.ejb.Schedule;
++import jakarta.ejb.Singleton;
++import jakarta.ejb.Startup;
++import jakarta.persistence.EntityManager;
++import jakarta.persistence.PersistenceContext;
++import java.time.LocalDateTime;
++
++@Singleton
++@Startup
+ public class AuctionTimerBean {
++
++    @PersistenceContext
++    private EntityManager em;
++
++    // every minute, close any auctions past their end time
++    @Schedule(minute="*", hour="*", persistent=false)
++    public void checkAuctions() {
++        em.createQuery("UPDATE Auction a SET a.closed = TRUE WHERE a.endTime < :now AND a.closed = FALSE")
++                .setParameter("now", LocalDateTime.now())
++                .executeUpdate();
++    }
+ }

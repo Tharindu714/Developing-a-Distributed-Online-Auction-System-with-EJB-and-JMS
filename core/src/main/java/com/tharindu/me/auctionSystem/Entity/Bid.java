@@ -28,5 +28,54 @@ public class Bid implements Serializable {
     @JoinColumn(name = "bidder_id")
     private User bidder;
 
-    // constructors, getters and setters
+    public Bid() {
+    }
+
+    public Bid(Long id, BigDecimal amount, LocalDateTime timestamp, Auction auction, User bidder) {
+        this.id = id;
+        this.amount = amount;
+        this.timestamp = timestamp;
+        this.auction = auction;
+        this.bidder = bidder;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public Auction getAuction() {
+        return auction;
+    }
+
+    public void setAuction(Auction auction) {
+        this.auction = auction;
+    }
+
+    public User getBidder() {
+        return bidder;
+    }
+
+    public void setBidder(User bidder) {
+        this.bidder = bidder;
+    }
 }
