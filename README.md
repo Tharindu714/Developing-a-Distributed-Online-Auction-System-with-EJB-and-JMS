@@ -156,6 +156,10 @@ Profile JVM performance in real time:
 
 ---
 
+![A4](https://github.com/user-attachments/assets/82631160-8d5a-40d2-b527-f950fd70e9d2)
+
+---
+
 ## 📄 License & Contact
 
 MIT © 2025 Tharindu714
