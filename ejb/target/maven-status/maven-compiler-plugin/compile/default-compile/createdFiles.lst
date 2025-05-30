@@ -1,3 +1,6 @@
 com\tharindu\me\auctionSystem\ejb\Remote\AuctionManager.class
 com\tharindu\me\auctionSystem\ejb\Remote\ProductService.class
 com\tharindu\me\auctionSystem\ejb\Bean\ProductServiceBean.class
+com\tharindu\me\auctionSystem\ejb\Bean\MessageStore.class
+com\tharindu\me\auctionSystem\ejb\Bean\JMSSubscriberMDB.class
+com\tharindu\me\auctionSystem\ejb\Bean\JMSPublisherBean.class

@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="core" />
-        <module name="ejb" />
-        <module name="ActiveMQ" />
         <module name="web" />
         <module name="ear" />
+        <module name="JMSPublisher" />
+        <module name="JMSSubscriber" />
+        <module name="ejb" />
+        <module name="ActiveMQ" />
       </profile>
     </annotationProcessing>
   </component>

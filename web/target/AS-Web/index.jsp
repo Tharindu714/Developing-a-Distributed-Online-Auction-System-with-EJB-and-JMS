@@ -1,6 +1,8 @@
 <%@ page import="com.tharindu.me.auctionSystem.DTO.ProductDTO" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +10,11 @@
     <title>Online Auction System</title>
     <style>
         /* Base reset */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
             font-family: 'Segoe UI', Tahoma, sans-serif;
@@ -22,10 +28,12 @@
             text-align: center;
             margin-bottom: 30px;
         }
+
         header h1 {
             font-size: 2.5rem;
             color: #2c3e50;
         }
+
         header p {
             color: #7f8c8d;
         }
@@ -41,26 +49,31 @@
         .assignment-card {
             background: #fff;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
             overflow: hidden;
             transition: transform 0.2s, box-shadow 0.2s;
         }
+
         .assignment-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
+
         .assignment-card header {
             background: #2980b9;
             color: #fff;
             padding: 15px;
             font-size: 1.25rem;
         }
+
         .assignment-card .content {
             padding: 15px;
         }
+
         .assignment-card .content p {
             margin-bottom: 10px;
         }
+
         .assignment-card .content .btn {
             display: inline-block;
             padding: 8px 12px;
@@ -71,6 +84,7 @@
             font-size: 0.9rem;
             transition: background 0.2s;
         }
+
         .assignment-card .content .btn:hover {
             background: #229954;
         }
@@ -110,6 +124,51 @@
         .receiver-btn:hover {
             background: #732d91;
             transform: scale(1.05);
+        }
+
+        .product-grid {
+            padding: 30px;
+            background-color: #f9f9f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: left;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-card h3 {
+            color: #0077cc;
+            margin-top: 0;
+        }
+
+        .product-card p {
+            margin: 8px 0;
+            color: #555;
         }
 
     </style>
@@ -162,31 +221,58 @@
     </div>
 </section>
 
-<h1>Available Products</h1>
-<ul>
-    <%
-        List<ProductDTO> products = (List<ProductDTO>) request.getAttribute("products");
-        if (products != null) {
-            for (ProductDTO product : products) {
-    %>
-    <li>
-        <strong><%= product.getName() %></strong><br/>
-        Description: <%= product.getDescription() %><br/>
-        Starting Price: $<%= product.getStartingPrice() %>
-    </li>
-    <%
-        }
-    } else {
-    %>
-    <li>No products available.</li>
-    <%
-        }
-    %>
-</ul>
+<section class="product-grid">
+    <h1 class="section-title">Available Products</h1>
 
-<footer>
-    &copy; 2025 Auction System — All Rights Reserved
-</footer>
+    <div class="grid-container">
+            <%
+    List<ProductDTO> products = (List<ProductDTO>) request.getAttribute("products");
+%>
+        <div class="grid-container">
+            <% if (products != null && !products.isEmpty()) {
+                for (ProductDTO product : products) {
+            %>
+            <div class="product-card">
+                <h3><%= product.getName() %>
+                </h3>
+                <p><strong>Description:</strong> <%= product.getDescription() %>
+                </p>
+                <p><strong>Starting Price:</strong> Rs. <%= product.getStartingPrice() %>
+                </p>
+            </div>
+            <% }
+            } else { %>
+            <p>No products available.</p>
+            <% } %>
+        </div>
+
+</section>
+
+<section style="margin-top: 40px; text-align: center;">
+    <h2>JMS Chat</h2>
+
+    <form action="sendMessage" method="post" style="margin-bottom:20px;">
+        <input
+                type="text"
+                name="message"
+                placeholder="Type your message…"
+                style="width:300px; padding:8px;"
+                required
+        />
+        <button type="submit" class="jms-btn sender-btn">✉️ Send</button>
+    </form>
+
+    <div id="messageList" style="max-width:400px; margin:0 auto; text-align:left;">
+        <c:forEach var="msg" items="${messages}">
+            <div style="padding:6px; border-bottom:1px solid #ddd;">
+                    ${msg}
+            </div>
+        </c:forEach>
+        <c:if test="${empty messages}">
+            <div>No messages yet.</div>
+        </c:if>
+    </div>
+</section>
 
 <section style="margin-top: 40px; text-align: center;">
     <h2>JMS Actions</h2>
@@ -199,6 +285,8 @@
         </form>
     </div>
 </section>
-
+<footer>
+    &copy; 2025 Auction System — All Rights Reserved
+</footer>
 </body>
 </html>

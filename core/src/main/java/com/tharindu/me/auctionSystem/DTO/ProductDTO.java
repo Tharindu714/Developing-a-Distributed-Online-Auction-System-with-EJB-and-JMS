@@ -8,6 +8,17 @@ public class ProductDTO implements Serializable {
     private String description;
     private double startingPrice;
 
+    public ProductDTO() {
+        // Default constructor for serialization
+    }
+
+    public ProductDTO(Long id, String name, String description, double startingPrice) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.startingPrice = startingPrice;
+    }
+
     public Long getId() {
         return id;
     }

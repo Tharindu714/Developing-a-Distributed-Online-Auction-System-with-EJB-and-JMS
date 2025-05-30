@@ -1,8 +1,0 @@
-com\tharindu\me\auctionSystem\DTO\BidDTO.class
-com\tharindu\me\auctionSystem\Entity\Bid.class
-com\tharindu\me\auctionSystem\Entity\Auction.class
-com\tharindu\me\auctionSystem\DTO\ProductDTO.class
-com\tharindu\me\auctionSystem\DTO\UserDTO.class
-com\tharindu\me\auctionSystem\Entity\Product.class
-com\tharindu\me\auctionSystem\Entity\User.class
-com\tharindu\me\auctionSystem\DTO\AuctionDTO.class

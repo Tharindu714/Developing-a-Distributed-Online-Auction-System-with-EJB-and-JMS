@@ -15,6 +15,8 @@
         <module>ejb</module>
         <module>ear</module>
         <module>ActiveMQ</module>
+        <module>JMSPublisher</module>
+        <module>JMSSubscriber</module>
     </modules>
 
     <properties>

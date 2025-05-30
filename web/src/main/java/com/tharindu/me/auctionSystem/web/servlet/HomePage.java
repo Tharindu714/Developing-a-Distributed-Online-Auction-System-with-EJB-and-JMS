@@ -1,13 +1,12 @@
 package com.tharindu.me.auctionSystem.web.servlet;
 
 import com.tharindu.me.auctionSystem.DTO.ProductDTO;
+import com.tharindu.me.auctionSystem.ejb.Bean.MessageStore;
 import com.tharindu.me.auctionSystem.ejb.Remote.ProductService;
-import jakarta.annotation.Resource;
+import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -16,24 +15,43 @@ import java.util.List;
 
 @WebServlet("/home")
 public class HomePage extends HttpServlet {
-    @Resource
+    @EJB
     private ProductService productService;
+    private MessageStore store;
 
     @Override
     public void init() throws ServletException {
         try {
             InitialContext ctx = new InitialContext();
-            productService = (ProductService) ctx.lookup("java:global/AS-EAR/ejb/ProductServiceBean!com.tharindu.me.auctionSystem.ejb.Remote.ProductService");
+
+            // Exact portable JNDI names from the server log
+            String prodLookup = "java:global/AS-EAR/EJB-Module/ProductServiceBean!com.tharindu.me.auctionSystem.ejb.Remote.ProductService";
+            productService = (ProductService) ctx.lookup(prodLookup);
+
+            String storeLookup = "java:global/AS-EAR/EJB-Module/MessageStore";
+            store = (MessageStore) ctx.lookup(storeLookup);
+
         } catch (NamingException e) {
             throw new ServletException("EJB lookup failed", e);
         }
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<ProductDTO> products = productService.getAllProducts(); // This should be ProductDTO
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        // 1. Get products and set as request attribute
+        List<ProductDTO> products = productService.getAllProducts(); // get actual products
+        System.out.println("Size of products: " + products.size());
+        if (products.isEmpty()) {
+            System.out.println("No products found.");
+        } else {
+            System.out.println("Products retrieved successfully.");
+        }
+        req.setAttribute("messages", store.getMessages());
         req.setAttribute("products", products);
-        req.getRequestDispatcher("index.jsp").forward(req, resp);
+        req.getRequestDispatcher("index.jsp").forward(req, resp);// set it for JSP access
     }
 
 }
+

@@ -1,6 +1,5 @@
 package com.tharindu.me.auctionSystem.Entity;
 
-
 import jakarta.persistence.*;
 
 import java.io.Serializable;
